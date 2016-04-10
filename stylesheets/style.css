@@ -1,0 +1,311 @@
+* {
+	margin:0;
+	padding:0;
+}
+body{
+	background: #ddd;
+}
+a {
+	text-decoration: none;
+	color:white;
+}
+/*****************header*******************/
+
+#header {
+	width:100%;
+	height: 150px;
+	background: #39650e;
+	color:white;
+	font-weight: bold;
+	position: relative;
+}
+#header img {
+	position: absolute;
+	top:20px;
+	left:40px;
+}
+#header h1 {
+	position: absolute;
+	top:35px;
+	left:130px;
+}
+#header h5 {
+	position: absolute;
+	top:80px;
+	left:133px;
+}
+#header ul {
+	position: absolute;
+	right:200px;
+	top:60px;
+	list-style:none;
+}
+#header li {
+	float: left;
+	width:80px;
+	height:30px;
+	margin-right: 5px;
+	text-align: center;
+	cursor: pointer;
+	line-height: 30px;
+}
+#header .active {background: RGB(0,205,0);}
+#header li:hover {background: RGB(0,205,0);}
+#header input {
+	position: absolute;
+	right:30px;
+	top:63px;
+	width:150px;
+	height: 20px;
+	border-radius: 15px;
+	border: none;
+	padding:2px;
+}
+#header button {
+	position: absolute;
+	right:31px;
+	top:65px;
+	width:30px;
+	height: 20px;
+	border:none;
+	border-radius: 15px;
+	background: white;
+	cursor: pointer;
+	color:blue;
+}
+
+/**************section*****************/
+
+#section {
+	width:69%;
+	position: absolute;
+	top:160px;
+	left:40px;
+	list-style: none;
+}
+#section h2 {
+	color:#39650e;
+	position: absolute;
+	top:10px;
+	left:0;
+}
+#section hr {
+	position: absolute;
+	top:35px;
+	left:0;
+	width:15%;
+	height: 2px;
+	margin:5px 0;
+	background: blue;
+}
+#section .lable {
+	position: absolute;
+	top:60px;
+	left:0;
+	width:10px;
+	height: 250px;
+	background: gray;
+}
+#section .lable:hover {background: blue;}
+
+#section .text {
+	position: absolute;
+	top:60px;
+	left:10px;
+	width:95%;
+	height:250px;
+	background: white;
+	box-shadow:3px 3px 3px;
+	font-size:18px;
+	padding:0 16px;
+	color:#817C7C;
+}
+#section .title {
+	font-size:22px;
+	color:blue;
+	margin-top:10px;
+}
+#section .time {
+	position: absolute;
+	top:270px;
+	left:30px;
+	color:#817C7C;
+}
+#section .blog1 {
+	width:100%;
+	position: absolute;
+	top:0;
+	left:0;
+}
+#section .blog2 {
+	width:100%;
+	position: absolute;
+	top:260px;
+	left:0;
+}
+#section .blog3 {
+	width:100%;
+	position: absolute;
+	top:520px;
+	left:0;
+}
+#section .blog4 {
+	width:100%;
+	position: absolute;
+	top:780px;
+	left:0;
+}
+#section .blog5 {
+	width:100%;
+	position: absolute;
+	top:1040px;
+	left:0;
+}
+#section .blog6 {
+	width:100%;
+	position: absolute;
+	top:1300px;
+	left:0;
+}
+#section .blog7 {
+	width:100%;
+	position: absolute;
+	top:1560px;
+	left:0;
+}
+#section .bottom {
+	position: absolute;
+	top:1100px;
+	left:370px;
+	list-style: none;
+}
+#section li {
+	float: left;
+	width:25px;
+	height: 25px;
+	border-radius: 4px;
+	text-align: center;
+	margin-right: 5px;
+}
+#section li:hover {background: blue;}
+#section li a {
+	font-size:22px;
+	color:green;
+}
+#section .bottom .active {background: blue;}
+
+/***************nav******************/
+
+#nav {
+	width:22%;
+	height: 300px;
+	background: white;
+	position: absolute;
+	top:220px;
+	right:40px;
+	box-shadow:3px 3px 3px;
+}
+#nav .link {
+	position: absolute;
+	top:10px;
+	left:20px;
+	color:#2CD6A3;
+	font-weight: bold;
+	font-size:22px;
+}
+#nav hr {
+	width:80%;
+	position: absolute;
+	top:50px;
+	left:20px;
+	height: 2px;
+	background: gray;
+}
+#nav .list {
+	position: absolute;
+	top:90px;
+	left:30px;
+	list-style: none;
+}
+#nav li {
+	float:left;
+	width:190px;
+	height: 30px;
+	line-height: 30px;
+	text-indent: 5px;
+	cursor: pointer;
+}
+#nav li:hover {background: red}
+#nav li a {
+	color:green;
+	font-size: 18px;
+}
+
+/**************footer*********************/
+
+#footer {
+	width:100%;
+	height: 150px;
+	background: #1F1F1F;
+	position: absolute;
+	top:1300px;
+	left:0;
+}
+#footer .by {
+	margin-top:100px;
+	margin-left:450px;
+	font-size:20px;
+	font-weight: bold;
+	color:#2CA6CB;
+}
+#footer .top {
+	position: absolute;
+	right:50px;
+	top:50px;
+	font-size: 18px;
+	color:white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
