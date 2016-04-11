@@ -78,122 +78,34 @@ a {
 
 #section {
 	width:69%;
+	height: 4850px;
+	background: white;
 	position: absolute;
 	top:170px;
 	left:40px;
 	list-style: none;
 }
-#section h2 {
-	color:#39650e;
-	position: absolute;
-	top:10px;
-	left:0;
-}
-#section hr {
-	position: absolute;
-	top:35px;
-	left:0;
-	width:15%;
-	height: 2px;
-	margin:5px 0;
-	background: blue;
-}
-#section .lable {
-	position: absolute;
-	top:60px;
-	left:0;
-	width:10px;
-	height: 250px;
-	background: gray;
-}
-#section .lable:hover {background: blue;}
-
-#section .text {
-	position: absolute;
-	top:60px;
-	left:10px;
-	width:95%;
-	height:250px;
-	background: white;
-	box-shadow:3px 3px 3px;
-	font-size:18px;
-	padding:0 16px;
-	color:#817C7C;
-}
 #section .title {
-	font-size:22px;
+	position: absolute;
+	left:30px;
+	top:30px;
 	color:blue;
-	font-weight: bold;
-	margin-top:10px;
 }
 #section .time {
 	position: absolute;
-	top:270px;
 	left:30px;
+	top:80px;
 	color:#817C7C;
 }
-#section .blog1 {
-	width:100%;
+#section .text {
 	position: absolute;
-	top:0;
-	left:0;
+	top:110px;
+	left:20px;
+	padding:10px;
+	color:#817C7C;
+	text-align:justify;
+	line-height: 26px;
 }
-#section .blog2 {
-	width:100%;
-	position: absolute;
-	top:260px;
-	left:0;
-}
-#section .blog3 {
-	width:100%;
-	position: absolute;
-	top:520px;
-	left:0;
-}
-#section .blog4 {
-	width:100%;
-	position: absolute;
-	top:780px;
-	left:0;
-}
-#section .blog5 {
-	width:100%;
-	position: absolute;
-	top:1040px;
-	left:0;
-}
-#section .blog6 {
-	width:100%;
-	position: absolute;
-	top:1300px;
-	left:0;
-}
-#section .blog7 {
-	width:100%;
-	position: absolute;
-	top:1560px;
-	left:0;
-}
-#section .bottom {
-	position: absolute;
-	top:1100px;
-	left:370px;
-	list-style: none;
-}
-#section li {
-	float: left;
-	width:25px;
-	height: 25px;
-	border-radius: 4px;
-	text-align: center;
-	margin-right: 5px;
-}
-#section li:hover {background: blue;}
-#section li a {
-	font-size:22px;
-	color:green;
-}
-#section .bottom .active {background: blue;}
 
 /***************nav******************/
 
@@ -249,7 +161,7 @@ a {
 	height: 150px;
 	background:black;
 	position: absolute;
-	top:1320px;
+	top:5040px;
 	left:0;
 }
 #footer img {
