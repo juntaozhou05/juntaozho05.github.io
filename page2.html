@@ -24,8 +24,6 @@
     </header>
       
     <section id="section">
-      <h2>最新博客</h2>
-      <hr>
 
       <div class="blog1">
         <div class="lable"></div>
@@ -85,29 +83,25 @@
       <div class="blog4">
         <div class="lable"></div>
             <p class="text">
-              <br><a href class="title">超级实用的41条JS技巧(转)</a><br><br>
-              1.  将彻底屏蔽鼠标右键
-              oncontextmenu=”window.event.returnValue=false”
-              < table border oncontextmenu=return(false)>< td>no< /table> 可用于 Table
-              2.  取消选取、防止复制
-              < body onselectstart=”return false”>
-              3.JS不允许粘贴
-              onpaste=”return false”
-              4. JS防止复制
-              oncopy=”return false;” oncut=”return false;”
-              5. IE 地址栏前换成自己的图标
-              < link rel=”Shortcut Icon” href=”favicon.ico”>
-              在文件的根目录放进去这个图片...
+              <br><a href class="title">JavaScript中SetInterval()与setTimeout()的区别</a><br><br>
+              在JavaScript中setTimeout()和setInterval()的语法相同，都有2个参数，一个是将要执行的代码字符串或者是函数，还有一个是以毫秒为单位的时间间隔，当过了那个时间段之后就将执行那段代码或函数。
+              但是区别是setTimeout()只会执行一次，而setInterval()则会根据设置的时间一直循环执行。
+              例如：
+              [html] view plain copy 在CODE上查看代码片派生到我的代码片
+              function myFunction(){  
+                  alert("myFunction");  
+              }  
+              setTimeout(myFunction(),1000)... 
             </p>
             <div class="time">
-               2016-03-31
+              2016-02-29
             </div>
             </div>
       </div>
       <ul class="bottom">
-        <li class="active"><a href="index.html">1</a></li>
-        <li><a href="page2.html">2</a></li>
-        <li><a href="page.html">3</a></li>
+        <li ><a href="index.html">1</a></li>
+        <li class="active"><a href="page2.html">2</a></li>
+        <li><a href="page3.html">3</a></li>
       </ul>
     </section>
     
