@@ -61,10 +61,10 @@ a {
 	border: none;
 	padding:2px;
 }
-#header button {
+#header .button {
 	position: absolute;
-	right:31px;
-	top:65px;
+	right:32px;
+	top:68px;
 	width:30px;
 	height: 20px;
 	border:none;
@@ -72,6 +72,7 @@ a {
 	background: white;
 	cursor: pointer;
 	color:blue;
+	font-size:12px;
 }
 
 /**************section*****************/

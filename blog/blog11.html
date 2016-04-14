@@ -24,30 +24,25 @@
     </header>
       
     <section id="section">
-      <h2 class="title">JavaScript中SetInterval()与setTimeout()的区别</h2>
+      <h2 class="title">js中的call及apply</h2>
       <div class="time">2016-02-29</div>
       <div class="text">
-        在JavaScript中setTimeout()和setInterval()的语法相同，都有2个参数，一个是将要执行的代码字符串或者是函数，还有一个是以毫秒为单位的时间间隔，当过了那个时间段之后就将执行那段代码或函数。<br>
-        但是区别是setTimeout()只会执行一次，而setInterval()则会根据设置的时间一直循环执行。<br>
-        例如：<br>
-        function myFunction(){  <br>
-            alert("myFunction");  <br>
-        }  <br>
-        setTimeout(myFunction(),1000);  <br>
-        这样隔一秒就会执行myFunction这个函数。<br>
-        例如：<br>
-        function myFunction(){  <br>
-            alert("myFunction");  <br>
-        }  <br>
-        setInterval(myFunction(),1000);  <br>
-        这样的话每隔一秒就会执行一次myFunction函数。<br>
-        如果要想停止循环执行setInterval()的话就可以给setInterval加上一个对象名，然后再使用clearInterval()函数。<br>
-        例如：<br>
-        function myFunction(){  <br>
-            alert("myFunction");  <br>
-        }  <br>
-        var timeer = setInterval(myFunction(),1000);  <br>
-        clearInterval(timer);<br>
+        响应式的核心非媒体查询莫属了，而媒体查询用的最多的还是浏览器尺寸查询，这里就总结一下尺寸媒体查询用法：<br><br>
+        首先设置《meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"》<br>
+        width = device-width：宽度等于当前设备的宽度<br>
+        initial-scale：初始的缩放比例（默认设置为1.0）  <br>
+        minimum-scale：允许用户缩放到的最小比例（默认设置为1.0） <br>   
+        maximum-scale：允许用户缩放到的最大比例（默认设置为1.0）<br>   
+        user-scalable：用户是否可以手动缩放（默认设置为no，因为我们不希望用户放大缩小页面）<br><br>
+        大多数媒体属性带有“min-”和“max-”前缀，用于表达“小于等于”和“大于等于”。<br>
+        媒体查询可以把浏览器的尺寸定位几个档次：<br>
+        小屏幕（平板，大于等于768px） <br>
+        @media (min-width: 768px) {}<br>
+        中等屏幕（桌面显示器，大于等于992px）<br>
+        @media (min-width: 992px) {}<br>
+        大屏幕（大桌面显示器，大于等于1200px） <br>
+        @media (min-width: 1200px) {}<br><br>
+        以上3种尺寸的分别方法基本就涵盖了目前设备的尺寸要求了。当然如果还想细分屏幕尺寸的话也是可以的。。<br>
       </div>
     </section>
     
