@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="imgs/logo.ico">
     <link rel="stylesheet" href="stylesheets/style.css">
+    <style type="text/css">
+      .active {
+        color:red;
+        background: green;
+      }
+    </style>
   </head>
   <body>
     <a name="top">
@@ -19,15 +25,15 @@
         <li><a href="http://main1.applinzi.com/">我的作品</a></li>
         <li><a href="https://github.com/juntaozhou05">我的代码</a></li>
       </ul>
-      <input type="text" placeholder="Search...">
-      <a href="https://www.baidu.com" class="button">搜索</a>
+      <!-- <input id="myText" type="text" value="" /> -->
+      <textarea id="myText" cols="30" rows="10"></textarea>
+      <a id="button" class="button">搜索</a>
     </header>
-      
-    <section id="section">
-      <h2>最新博客</h2>
-      <hr>
+    <h2 id="maintitle">我的博客</h2>
+    <ul id="pageMain">
+    
 
-      <div class="blog1">
+      <li class="blog1">
         <div class="lable"></div>
           <p class="text">
             <br><a href="blog/blog12.html" class="title">为什么JavaScript是单线程的却能让AJAX异步</a><br><br>
@@ -37,10 +43,9 @@
           <div class="time">
             2016-04-14
           </div>
-        </div>  
-      </div>
+        </li>  
         
-      <div class="blog2">
+      <li class="blog2">
         <div class="lable"></div>
           <p class="text">
             <br><a href="blog/blog11.html" class="title">响应式核心之媒体查询</a><br><br>
@@ -52,10 +57,9 @@
           <div class="time">
             2016-04-13
           </div>
-        </div>  
-      </div>
+        </li>  
 
-      <div class="blog3">
+      <li class="blog3">
         <div class="lable"></div>
             <p class="text">
               <br><a href="blog/blog10.html" class="title">JavaScript常用函数和方法</a><br><br>
@@ -72,10 +76,9 @@
             <div class="time">
               2016-04-13
             </div>
-        </div>
-      </div>
+        </li>
 
-      <div class="blog4">
+      <li class="blog4">
         <div class="lable"></div>
             <p class="text">
               <br><a href="blog/blog9.html" class="title">超级实用的41条JS技巧(转)</a><br><br>
@@ -95,16 +98,144 @@
             <div class="time">
                2016-03-31
             </div>
+      </li>
+
+      <li class="blog1">
+        <div class="lable"></div>
+          <p class="text">
+            <br><a href="blog/blog8.html" class="title">常见的web性能优化方法(转)</a><br><br>
+            前端是庞大的，包括 HTML、 CSS、 Javascript、Image 、Flash等等各种各样的资源。前端优化是复杂的，针对方方面面的资源都有不同的方式。那么，前端优化的目的是什么 ?
+　         　1. 从用户角度而言，优化能够让页面加载得更快、对用户的操作响应得更及时，能够给用户提供更为友好的体验。
+　         　2. 从服务商角度而言，优化能够减少页面请求数、或者减小请求所占带宽，能够节省可观的资源。
+　         　总之，恰当的优化不仅能够改善站点的用户体验并且能够节省相当的资源利用。
+　         　前端优化的途径有很多，按粒度大致可以分为两类，第一类是页面级别的优化，例如
+             Javascript中的DOM 操作优化、CSS选择符优化 ...   
+          </p>  
+          <div class="time">
+            2016-03-30
+          </div> 
+      </li>
+        
+      <li class="blog2">
+        <div class="lable"></div>
+          <p class="text">
+            <br><a href="blog/blog7.html" class="title">JavaScript常用的获取各个元素宽度和高度</a><br><br>
+            这里总结一下JavaScript常用的获取各个元素宽度和高度的一些方法：
+            1.document.body.clientWidth - 网页可见区域宽
+               document.body.clientHeight - 网页可见区域高
+            2.document.body.offsetWidth - 网页可见区域宽，包括边线和滚动条的宽
+               document.body.offsetHeight - 网页可见区域高，包括边线和滚动条的高
+            3.document.body.scrollWidth - 网页总宽
+               document.body.scrollHeight - 网页总高
+            4.document.body.scrollTop - 有滚动条的时候，向下拖动滚动条，上方不显示的那部分高度
+               document.body.scrollLeft - 有滚动条的时候，向下拖动滚动条，上方不显示的那部分宽度。...
+          </p>  
+          <div class="time">
+            2016-03-29
+          </div> 
+      </li>
+
+      <li class="blog3">
+        <div class="lable"></div>
+            <p class="text">
+              <br><a href="blog/blog6.html" class="title">css盒子模型总结</a><br><br>
+              css盒子模型分为IE盒子模型和“W3C”标准盒子模型。我们一般都是使用的“W3C”标准盒子模型。所以这里就只介绍“W3C”标准盒子模型
+              css盒子模型一共分为五层，从上到下分别是：
+              边框（border），位于盒子的第一层。
+              元素内容（content）、内边距（padding），两者同位于第二层。
+              背景图（background-image），位于第三层。
+              背景色（background-color），位于第四层。
+              整个盒子的外边距（margin），位于第五层...
+            </p>
+            <div class="time">
+              2016-03-04
             </div>
-      </div>
-      <ul class="bottom">
-        <li class="active"><a href="index.html">1</a></li>
-        <li><a href="page2.html">2</a></li>
-        <li><a href="page.html">3</a></li>
-      </ul>
-    </section>
-    
-   
+      </li>
+
+      <li class="blog4">
+        <div class="lable"></div>
+            <p class="text">
+              <br><a href="blog/blog5.html" class="title">JavaScript中SetInterval()与setTimeout()的区别</a><br><br>
+              在JavaScript中setTimeout()和setInterval()的语法相同，都有2个参数，一个是将要执行的代码字符串或者是函数，还有一个是以毫秒为单位的时间间隔，当过了那个时间段之后就将执行那段代码或函数。
+              但是区别是setTimeout()只会执行一次，而setInterval()则会根据设置的时间一直循环执行。
+              例如：
+              [html] view plain copy 在CODE上查看代码片派生到我的代码片
+              function myFunction(){  
+                  alert("myFunction");  
+              }  
+              setTimeout(myFunction(),1000)... 
+            </p>
+            <div class="time">
+              2016-02-29
+            </div>
+      </li>
+
+      <li class="blog1">
+        <div class="lable"></div>
+          <p class="text">
+            <br><a href="blog/blog4.html" class="title">css中长度尺寸的一些总结</a><br><br>
+            在css中我们一般习惯使用长度单位有px,em,rem这三个，现在总结一下各自特点。
+            px：像素（Pixel）。是相对于屏幕分辨率的长度单位，是屏幕设备物理上能显示出的最小的一个点。这是我们在PC端固定布局最常用的单位了，但是使用的时候有一个问题就是它无法随屏幕分辨率的大小改变而缩放，所以在移动端时请谨慎使用。
+            em：是相对长度单位。相对于当前对象内文本的字体尺寸。如当前对行内文本的字体尺寸未被人为设置，则相对于浏览器的默认字体尺寸。所有现代浏览器下默认字体尺寸是16px，这时1em=16px。如果修改了当前父级元素的font-size，em的大小也会随之改变。但是如果嵌套了太多的话em就非常难计算了。...
+          </p>  
+          <div class="time">
+            2016-03-30
+          </div>  
+      </li>
+        
+      <li class="blog2">
+        <div class="lable"></div>
+          <p class="text">
+            <br><a href="blog/blog3.html" class="title">css属性选择器</a><br><br>
+            css属性选择器是可以根据元素的属性及属性值来选择元素的。
+            *[def] {color:red} 把包含def属性的所有元素变为红色。
+            abc[def] {color:red} 把包含def属性的abc元素变为红色。
+            abc[def][ghi] {color:red} 把同时包含def和ghi属性的abc元素变为红色。
+            abc[def="ghi"] {color:red} 把def属性值为ghi的abc元素变为红色（请注意，这种格式要求必须与属性值完全匹配。）。
+            abc[def~="ghi"] {color:red} 把def属性值包含ghi且如果有2个或以上属性值前面或是后面用空格隔开或是只有ghi一个属性值的abc元素变为红色（如果忽略了波浪号，则说明需要完成完全值匹配）。...
+          </p>  
+          <div class="time">
+            2016-02-29
+          </div> 
+      </li>
+
+      <li class="blog3">
+        <div class="lable"></div>
+            <p class="text">
+              <br><a href="blog/blog2.html" class="title">css常用的隐藏元素的方式</a><br><br>
+              在css中我们经常会使用到隐藏元素的方法，最常用的基本有以下种方式：
+              1.display:none;  这种方式会让元素无法点击，并且不占用任何空间。（设置display:block;可以让元素可见）
+              2. visibility: hidden;  这种方式元素也无法点击，但是会占用空间。（设置visibility:visiable可以让元素可见）
+              3.position: absolute; top: -9999px;  这种方式会使元素无法点击，并且不占用任何空间。（设置top值在可视区域里可以让元素可见）
+              4. position: relative; top: -9999px;  这种方式元素也无法点击，但是会占用空间。（设置top值在可视区域里可以让元素可见）...
+            </p>
+            <div class="time">
+              2016-02-29
+            </div>
+      </li>
+
+      <li class="blog4">
+        <div class="lable"></div>
+            <p class="text">
+              <br><a href="blog/blog1.html" class="title">js中的call及apply</a><br><br>
+              call([thisObj[,arg1[, arg2[, [,.argN]]]]])：调用一个对象的一个方法，以另一个对象替换当前对象。它的第一个参数用作 this 的对象。其他参数都直接传递给函数自身。
+              apply([thisObj[,argArray]])：应用某一对象的一个方法，用另一个对象替换当前对象。 apply() 方法有两个参数，用作 this 的对象和要传递给函数的参数的数组。
+              他们都可以用来代替另一个对象调用一个方法，将一个函数的对象上下文从初始的上下文改变为由 thisObj 指定的新对象。
+              call主要用在js对象各方法互相调用的时候，使当前this实例指针保持一致,或在特殊情况下需要改变this指针。...
+            </p>
+            <div class="time">
+          2016-02-29
+            </div>
+      </li>
+    </ul>
+
+    <div id="pageBox">
+      <span id="prev">上一页</span>
+        <ul id="pageNav">
+        </ul>
+        <span id="next">下一页</span>
+    </div>
+
     <nav id="nav">
       <p class="link">网页链接</p>
       <hr>
@@ -121,5 +252,103 @@
       <p class="by">Author by Zhou Juntao @2016</p>
       <a href="#top" class="top">Top</a>
     </footer>
+
   </body>
+  <script>
+    //搜索
+    // var button = document.getElementById("button");
+    // var myVal= document.getElementById("myText").innerHTML;
+    //   button.onclick = function() {
+    //     alert(myVal);
+    //     // window.location.href = "https://www.baidu.com/s?wd="+myVal+"&rsv_spt=1&rsv_iqid=0xe8c5ee7d00027c98&issp=1&f=3&rsv_bp=0&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=0&rsv_sug3=3&rsv_sug1=1&rsv_sug7=100&rsv_t=0b5aAY37fGxtJpfVnxOdAUJPxf10M9%2BGXeLR1sRDgqNOwM%2FWEGYrYk1bO9sWvfa1bUQy&prefixsug=12&rsp=0&inputT=1956&rsv_sug4=2686";
+    //   }
+
+    tabPage({
+      pageMain : 'pageMain',
+      pageNav : 'pageNav',
+      pagePrev: 'prev',
+      pageNext: 'next',
+      curNum: 4,      //每页显示的条数
+      activeClass: 'active',   //高光显示的class
+      ini: 0    //初始化显示的页面
+    });
+
+    function tabPage(tabPage){
+      var pageMain = document.getElementById(tabPage.pageMain);   //获取内容列表
+      var pageNav = document.getElementById(tabPage.pageNav);     //获取分页
+      var pagePrev = document.getElementById(tabPage.pagePrev);   //上一页
+      var pageNext = document.getElementById(tabPage.pageNext);   //下一页
+      
+      var curNum = tabPage.curNum;                                //每页显示数
+      var len = Math.ceil(pageMain.children.length / curNum);     //计算总页数
+      var pageList = '';                                          //生成页码
+      var iNum = 0;                                               //当前的索引值index
+      
+      for(var i = 0; i < len; i++){
+        pageList+='<a href="javascript:;">'+ ( i + 1)+'</a>';
+      }
+      pageNav.innerHTML = pageList;
+      
+      pageNav.children[0].className = tabPage.activeClass;        //头一页加高亮显示
+      
+      for(var i = 0; i < pageNav.children.length; i++){
+        pageNav.children[i].index = i;
+        pageNav.children[i].onclick = function(){
+          for(var t = 0; t < pageNav.children.length; t++){
+            pageNav.children[t].className = '';
+          }
+          this.className = tabPage.activeClass;
+          iNum = this.index;
+          ini(iNum);
+        };
+      }
+      
+      
+      //下一页
+      pageNext.onclick = function(){
+        if(iNum == len - 1){
+          alert('已经是最后一页');
+          return false;
+        }else{
+          for(var t = 0; t < pageNav.children.length; t++){
+            pageNav.children[t].className = '';
+          }
+          iNum++;
+          pageNav.children[iNum].className = tabPage.activeClass;
+          ini(iNum);
+        }
+      };
+      
+      //上一页
+      pagePrev.onclick = function(){
+        if(iNum == 0){
+          alert('当前是第一页');
+          return false;
+        }else{
+          for(var t = 0; t < pageNav.children.length; t++){
+            pageNav.children[t].className = '';
+          }
+          iNum--;
+          pageNav.children[iNum].className = tabPage.activeClass;
+          ini(iNum);
+        }
+      };
+      
+      function ini(iNum){
+        for(var i = 0; i < pageMain.children.length; i++){
+          pageMain.children[i].style.display = 'none';
+        }
+        
+        for(var i = 0; i < curNum; i++){
+          if(pageMain.children[(iNum * curNum + i)] == undefined){ continue; }
+          pageMain.children[(iNum * curNum + i)].style.display = 'block';
+        }
+      }
+      
+      ini(iNum);
+      
+    }
+    
+
+  </script>
 </html>

@@ -51,7 +51,7 @@ a {
 }
 #header .active {background: RGB(0,205,0);}
 #header li:hover {background: RGB(0,205,0);}
-#header input {
+#header textarea {
 	position: absolute;
 	right:30px;
 	top:63px;
@@ -76,125 +76,25 @@ a {
 }
 
 /**************section*****************/
-
-#section {
+#maintitle {
+	margin-top: 1%;
+	margin-left: 3%;
+}
+#pageMain {
 	width:69%;
-	position: absolute;
-	top:170px;
-	left:40px;
+	margin-left: 3%;
 	list-style: none;
 }
-#section h2 {
-	color:#39650e;
-	position: absolute;
-	top:10px;
-	left:0;
-}
-#section hr {
-	position: absolute;
-	top:35px;
-	left:0;
-	width:15%;
-	height: 2px;
-	margin:5px 0;
-	background: blue;
-}
-#section .lable {
-	position: absolute;
-	top:60px;
-	left:0;
-	width:10px;
-	height: 250px;
-	background: gray;
-}
-#section .lable:hover {background: blue;}
-
-#section .text {
-	position: absolute;
-	top:60px;
-	left:10px;
-	width:95%;
-	height:250px;
+#pageMain li {
 	background: white;
-	box-shadow:3px 3px 3px;
-	font-size:18px;
-	padding:0 16px;
-	color:#817C7C;
+	margin-top: 3%;
+	padding:1%
 }
-#section .title {
-	font-size:22px;
-	color:blue;
+#pageMain .title {
+	color:#3498db;
 	font-weight: bold;
-	margin-top:10px;
 }
-#section .time {
-	position: absolute;
-	top:270px;
-	left:30px;
-	color:#817C7C;
-}
-#section .blog1 {
-	width:100%;
-	position: absolute;
-	top:0;
-	left:0;
-}
-#section .blog2 {
-	width:100%;
-	position: absolute;
-	top:260px;
-	left:0;
-}
-#section .blog3 {
-	width:100%;
-	position: absolute;
-	top:520px;
-	left:0;
-}
-#section .blog4 {
-	width:100%;
-	position: absolute;
-	top:780px;
-	left:0;
-}
-#section .blog5 {
-	width:100%;
-	position: absolute;
-	top:1040px;
-	left:0;
-}
-#section .blog6 {
-	width:100%;
-	position: absolute;
-	top:1300px;
-	left:0;
-}
-#section .blog7 {
-	width:100%;
-	position: absolute;
-	top:1560px;
-	left:0;
-}
-#section .bottom {
-	position: absolute;
-	top:1100px;
-	left:370px;
-	list-style: none;
-}
-#section li {
-	float: left;
-	width:25px;
-	height: 25px;
-	border-radius: 4px;
-	text-align: center;
-	margin-right: 5px;
-}
-#section li:hover {background: blue;}
-#section li a {
-	font-size:22px;
-	color:green;
-}
-#section .bottom .active {background: blue;}
+
 
 /***************nav******************/
 
@@ -250,7 +150,7 @@ a {
 	height: 150px;
 	background:black;
 	position: absolute;
-	top:1320px;
+	top:1120px;
 	left:0;
 }
 #footer img {
@@ -272,10 +172,27 @@ a {
 	font-size: 20px;
 	color:white;
 }
-
-
-
-
+/****翻页***/
+#pageBox {
+    padding: 10px 0 0 0;
+    width:69%;
+    text-align: center;
+}
+#pageBox span {
+    display: inline-block;
+    width: 60px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    color: #fff;
+    background: #08a586;
+}
+#pageNav {
+	display: inline-block;
+}
+#pageNav a {
+	margin-left: 5px;
+}
 
 
 
