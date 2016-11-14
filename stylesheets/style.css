@@ -196,9 +196,16 @@ a {
 
 #button {
 	position: absolute;
-	
+    top: 67px;
+    right: 20px;
+    width: 40px;
 }
-
+#myText {
+	position: absolute;
+    top: 67px;
+    right: 60px;
+    width: 120px;
+}
 
 
 
