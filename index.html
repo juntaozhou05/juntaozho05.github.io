@@ -256,9 +256,8 @@
   <script>
     //搜索
     var btn = document.getElementById("button");
-    var myVal= document.getElementById("myText").value;
       btn.onclick = function() {
-        alert(myVal);
+        var myVal= document.getElementById("myText").value;
         window.location.href = 'https://www.baidu.com/s?wd='+myVal;
       }
 
