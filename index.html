@@ -25,8 +25,7 @@
         <li><a href="http://main1.applinzi.com/">我的作品</a></li>
         <li><a href="https://github.com/juntaozhou05">我的代码</a></li>
       </ul>
-      <!-- <input id="myText" type="text" value="" /> -->
-      <textarea id="myText" cols="30" rows="10"></textarea>
+      <input id="myText" type="text" value="" />
       <a id="button" class="button">搜索</a>
     </header>
     <h2 id="maintitle">我的博客</h2>
@@ -257,7 +256,7 @@
   <script>
     //搜索
     var btn = document.getElementById("button");
-    var myVal= document.getElementById("myText").innerHTML;
+    var myVal= document.getElementById("myText").value;
       btn.onclick = function() {
         alert(myVal);
         window.location.href = 'https://www.baidu.com/s?wd='+myVal;
