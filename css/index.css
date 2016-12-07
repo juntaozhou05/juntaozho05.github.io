@@ -70,18 +70,19 @@ a:hover {
 	color:blue;
 	font-weight: bold;
 }
-#back {
-	font-size: 22px;
-	position: absolute;
-	left: 20px;
-	top: 26px;
-}
 #other {
 	background: #e7e7e7;
 	padding:10px;
 	margin-left: 20px;
 	text-align: center;
 }
+#back {
+	font-size: 22px;
+	position: absolute;
+	left: 20px;
+	top: 26px;
+}
+
 
 footer {
 	width: 100%;
