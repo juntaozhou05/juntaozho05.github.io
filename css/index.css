@@ -76,10 +76,11 @@ a:hover {
 	left: 20px;
 	top: 26px;
 }
-#otherv {
+#other {
 	background: #e7e7e7;
 	padding:10px;
 	margin-left: 20px;
+	text-align: center;
 }
 
 footer {
