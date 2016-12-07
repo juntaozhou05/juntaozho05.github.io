@@ -76,6 +76,11 @@ a:hover {
 	left: 20px;
 	top: 26px;
 }
+#otherv {
+	background: #e7e7e7;
+	padding:10px;
+	margin-left: 20px;
+}
 
 footer {
 	width: 100%;
