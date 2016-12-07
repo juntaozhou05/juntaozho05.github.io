@@ -43,7 +43,7 @@
          </nav>
       </div>
 
-      <div class="container">
+      <div class="container" id="container">
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
         css盒子模型分为IE盒子模型和“W3C”标准盒子模型。我们一般都是使用的“W3C”标准盒子模型。所以这里就只介绍“W3C”标准盒子模型。<br>
@@ -91,8 +91,9 @@
   <script src="../js/jquery.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
   <script>
-    var h = document.documentElement.clientHeight;
+    var container = document.getElementById('container');
     var footer = document.getElementById('footer');
-    footer.style.top = document.documentElement.clientHeight-40+"px";
+    var h = container.offsetHeight;
+    footer.style.top = container.offsetHeight+20+"px";
   </script>
 </html>
