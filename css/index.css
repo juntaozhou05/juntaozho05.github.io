@@ -71,6 +71,14 @@ a:hover {
 	font-weight: bold;
 }
 
+footer {
+	width: 100%;
+}
+footer p {
+	width: 100%;
+	text-align: center;
+}
+
 @media (max-width:768px) {
 	h2 {
 		font-size: 25px;
