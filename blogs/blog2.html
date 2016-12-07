@@ -83,11 +83,16 @@
       </div>
 
       <br><br>
-      <footer>
+      <footer id="footer">
         <p>Author by Zhou Juntao @2016</p>
       </footer>
 
   </body>
   <script src="../js/jquery.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
+  <script>
+    var h = document.documentElement.clientHeight;
+    var footer = document.getElementById('footer');
+    footer.style.top = document.documentElement.clientHeight-40+"px";
+  </script>
 </html>
