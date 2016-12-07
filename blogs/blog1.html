@@ -43,7 +43,7 @@
          </nav>
       </div>
 
-      <div class="container">
+      <div class="container" id="container">
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
             call([thisObj[,arg1[, arg2[, [,.argN]]]]])：调用一个对象的一个方法，以另一个对象替换当前对象。它的第一个参数用作 this 的对象。其他参数都直接传递给函数自身。<br>
@@ -64,4 +64,11 @@
   </body>
   <script src="../js/jquery.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
+  <script>
+    var h = document.getElmentById('container').offsetHeight;
+    var height = document.documentElement.clientHeight
+    if(h<height) {
+      document.getElmentById('container').style.height = height+'px';
+    }
+  </script>
 </html>
