@@ -73,6 +73,8 @@ a:hover {
 
 footer {
 	width: 100%;
+	position: fixed;
+	bottom:10px;
 }
 footer p {
 	width: 100%;
