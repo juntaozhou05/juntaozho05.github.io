@@ -68,6 +68,7 @@ a:hover {
 }
 #pageBox .active {
 	color:blue;
+	font-weight: bold;
 }
 
 @media (max-width:768px) {
