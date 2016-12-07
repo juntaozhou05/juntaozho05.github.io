@@ -65,11 +65,12 @@
   <script src="../js/jquery.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
   <script>
-    var h = document.getElmentById('container').offsetHeight;
+    var container = document.getElmentById('container');
+    var h = container.offsetHeight;
     var height = document.documentElement.clientHeight
     if(h<height) {
       document.getElmentById('container').style.height = height+'px';
-      alert(document.getElmentById('container').offsetHeight);
+      alert(container.offsetHeight);
     }
   </script>
 </html>
