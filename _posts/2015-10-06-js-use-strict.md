@@ -1,13 +1,12 @@
 ---
-
 layout: post
 title: "js 严格模式和非严格模式的区别"
-subtitle: 'Using Vim with non-english input method'
+subtitle: "Using Vim with non-english input method"
 author: "Hux"
 header-style: text
 tags:
-
-- Js
+  - Js
+---
 
 1.  严格模式下，不允许给未声明的变量赋值
 2.  严格模式下，arguments 变为参数的静态副本。非严格模式下，arguments 对象里的元素和对应的参数是指向同一个值的引用。传的参数是对象除外。arguments 和形参共享传递。
@@ -50,10 +49,12 @@ tags:
     ```
 
 5.  严格模式下，删除不可配置(configurable=false)的属性报错。非严格模式返回 false，静默失败。
-    `!function (a){ var obj={}; Object.defineProperty(obj,'a',{ configurable: false }); console.log(delete obj.a); //flase }(1); !function (a){ 'use strict'; var obj={}; Object.defineProperty(obj, 'a', { configurable: false }); console.log(delete obj.a); //TypeError }(1);` 6.严格模式下，修改不可写(writable=false)的属性报错。
+    `!function (a){ var obj={}; Object.defineProperty(obj,'a',{ configurable: false }); console.log(delete obj.a); //flase }(1); !function (a){ 'use strict'; var obj={}; Object.defineProperty(obj, 'a', { configurable: false }); console.log(delete obj.a); //TypeError }(1);`
+6.  严格模式下，修改不可写(writable=false)的属性报错。
     `!function () { var obj = { a: 1 }; Object.defineProperty(obj, 'a', { writable: false }); obj.a = 2; console.log(obj.a); //1 //证明没有被修改 }(); !function () { 'use strict'; var obj = { a: 1 }; Object.defineProperty(obj, 'a', {writable: false}); obj.a = 2; //TypeError }();`
-6.  严格模式下，对象字面量重复属性名报错。
-    `!function() { var obj = { x: 1, x: 2 }; console.log(obj.x); //2 }(); !function() { 'use strict'; var obj = { x: 1, x: 2 }; console.log(obj.x); //IE10+报错。IE7~9、Chrome、FF不报错，结果为：2 }();` 8.严格模式下，给只读属性赋值报错。
+7.  严格模式下，对象字面量重复属性名报错。
+    `!function() { var obj = { x: 1, x: 2 }; console.log(obj.x); //2 }(); !function() { 'use strict'; var obj = { x: 1, x: 2 }; console.log(obj.x); //IE10+报错。IE7~9、Chrome、FF不报错，结果为：2 }();`
+8.  严格模式下，给只读属性赋值报错。
 
         ```
         !function () {
@@ -63,7 +64,7 @@ tags:
         }();
         ```
 
-    9.严格模式下，给不可扩展对象的新属性赋值报错
+9.  严格模式下，给不可扩展对象的新属性赋值报错
 
         ```
         !function () {
@@ -74,7 +75,7 @@ tags:
         }();
         ```
 
-    10.ES6 中，严格模式下，禁止设置五种基本类型值的属性。
+10. ES6 中，严格模式下，禁止设置五种基本类型值的属性。
 
 ```
 !function () {
@@ -91,5 +92,3 @@ tags:
 12.严格模式下，使用 apply/call/bind，当传入参数是 null/undefined 时，this 指向 null/undefined，而不是全局对象。  
 13.严格模式下，不再支持 arguments.callee  
  严格模式下，不再支持 arguments.caller
-
-14.
