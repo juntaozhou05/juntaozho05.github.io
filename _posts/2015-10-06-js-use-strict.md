@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "js 严格模式和非严格模式的区别"
-subtitle: "Using Vim with non-english input method"
-author: "Hux"
+subtitle: ""
+author: "ZJT"
 header-style: text
 tags:
   - Js
