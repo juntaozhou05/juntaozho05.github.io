@@ -152,3 +152,188 @@ getMyWidth() {
   })
 }
 ```
+
+### 扩展：node 的事件循环机制
+
+nodejs 具有事件驱动和非阻塞但线程的特点，使相关应用变得比较轻量和高效。当应用程序需要相关 I/O 操作时，线程并不会阻塞，而是把 I/O 操作移交给底层类库（如：libuv）。此时 nodejs 线程会去处理其他的任务，当底层库处理完相关的 I/O 操作后，会将主动权再次交还给 nodejs 线程。因此 event loop 的作用就是起到调度线程的作用，如当底层类库处理 I/O 操作后调度 nodejs 单线程处理后续的工作。也就是说当 nodejs 程序启动的时候，它会开启一个 event loop 以实现异步的 api 调度、schedule timers 、回调 process.nextTick()。
+从上也可以看出 nodejs 虽说是单线程，但是在底层类库处理异步操作的时候仍然是多线程。
+
+下面是一个 libuv 引擎中的事件循环的模型:
+
+┌───────────────────────┐
+┌─>│ timers │
+│ └──────────┬────────────┘
+│ ┌──────────┴────────────┐
+│ │ I/O callbacks │
+│ └──────────┬────────────┘
+│ ┌──────────┴────────────┐
+│ │ idle, prepare │
+│ └──────────┬────────────┘ ┌───────────────┐
+│ ┌──────────┴────────────┐ │ incoming: │
+│ │ poll │<──connections─── │
+│ └──────────┬────────────┘ │ data, etc. │
+│ ┌──────────┴────────────┐ └───────────────┘
+│ │ check │
+│ └──────────┬────────────┘
+│ ┌──────────┴────────────┐
+└──┤ close callbacks │
+└───────────────────────┘
+注：模型中的每一个方块代表事件循环的一个阶段
+
+上述的五个阶段都是按照先进先出的规则执行回调函数。按顺序执行每个阶段的回调函数队列，直至队列为空或是该阶段执行的回调函数达到该阶段所允许一次执行回调函数的最大限制后，才会将操作权移交给下一阶段。
+
+每个阶段的简单概要：
+
+- timers: 执行 setTimeout() 和 setInterval() 预先设定的回调函数。
+- I/O callbacks: 大部分执行都是 timers 阶段或是 setImmediate() 预先设定的并且出现异常的回调函数事件。
+- idle, prepare: nodejs 内部函数调用。
+- poll: 搜寻 I/O 事件，nodejs 进程在这个阶段会选择在该阶段适当的阻塞一段时间。
+- check: setImmediate() 函数会在这个阶段执行。
+- close callbacks: 执行一些诸如关闭事件的回调函数，如 socket.on('close', ...) 。
+
+**每个阶段的详细内容：**
+
+poll:该阶段主要是两个任务：
+
+1. 当 timers 的定时器到时后，执行定时器（setTimeout 和 setInternal）的回调函数。
+2. 执行 poll 队列里面的 I/O 队列。
+   值得注意的是，poll 阶段在执行 poll queue 中的回调时实际上不会无限的执行下去。有两种情况 poll 阶段会终止执行 poll queue 中的下一个回调：1.所有回调执行完毕。2.执行数超过了 node 的限制。
+
+timers:
+
+指定线程执行定时器（setTimeout 和 setInterval）的回调函数，但是大多数的时候定时器的回调函数执行的时间要远大于定时器设定的时间。因为必须要等 poll phrase 中的 poll queue 队列为空时，poll 才会去查看 timer 中有没有到期的定时器然后去执行定时器中的回调函数。
+
+I/O callbacks:
+
+该阶段执行一些诸如 TCP 的 errors 回调函数。
+
+check:
+
+如果 poll 中已没有排队的队列，并且存在 setImmediate() 立即执行的回调函数，这是 event loop 不会在 poll 阶段阻塞等待相应的 I/O 事件，而是直接去 check 阶段执行 setImmediate() 函数。
+
+close callback:
+
+该阶段执行 close 的事件函数。
+
+**process.nextTick,setTimeout 与 setImmediate 的区别与使用场景**
+
+1. process.nextTick()函数
+
+- 尽管 process.nextTick()也是一个异步的函数，但是它并没有出现在上面 event loop 的结构图中。不管当前正在 event loop 的哪个阶段，在当前阶段执行完毕后，跳入下个阶段前的瞬间执行 process.nextTick()函数。
+- 由于 process.nextTick()函数的特性，很可能出现一种恶劣的情形：在 event loop 进入 poll 前调用该函数，就会阻止程序进入 poll 阶段 allows you to "starve" your I/O by making recursive process.nextTick() calls。
+- 但是也正是 nodejs 的一个设计哲学：每个函数都可以是异步的，即使它不必这样做。例如下面程序片段，如果不对内部函数作异步处理就可能出现异常。
+
+```
+let bar;
+
+// this has an asynchronous signature, but calls callback synchronously
+function someAsyncApiCall(callback) { callback(); }
+
+// the callback is called before `someAsyncApiCall` completes.
+someAsyncApiCall(() => {
+
+  // since someAsyncApiCall has completed, bar hasn't been assigned any value
+  console.log('bar', bar); // undefined
+
+});
+
+bar = 1;
+```
+
+由于 someAsyncApiCall 函数在执行时，内部函数是同步的，这是变量 bar 还没有被赋值。如果改为下面的就会这个异常。
+
+```
+let bar;
+
+function someAsyncApiCall(callback) {
+  process.nextTick(callback);
+}
+
+someAsyncApiCall(() => {
+  console.log('bar', bar); // 1
+});
+
+bar = 1;
+```
+
+两者的比较
+
+- process.nextTick() 函数是在任何阶段执行结束的时刻
+- setImmediate() 函数是在 poll 阶段后进去 check 阶段事执行
+
+process.nextTick() 函数的应用
+
+- 允许线程在进入 event loop 下一个阶段前做一些关于处理异常、清理一些无用或无关的资源。l 例如下面：
+
+```
+function apiCall(arg, callback) {
+  if (typeof arg !== 'string')
+    return process.nextTick(callback,
+    new TypeError('argument should be string'));
+}
+```
+
+- 在进入下个 event loop 阶段前，并且回调函数还没有释放回调权限时执行一些相关操作。如下代码：
+
+```
+const EventEmitter = require('events');
+const util = require('util');
+
+function MyEmitter() {
+  EventEmitter.call(this);
+
+  // use nextTick to emit the event once a handler is assigned
+  process.nextTick(function() {
+    this.emit('event');
+  }.bind(this));
+}
+util.inherits(MyEmitter, EventEmitter);
+
+const myEmitter = new MyEmitter();
+myEmitter.on('event', function() {
+  console.log('an event occurred!');
+});
+```
+
+在 MyEmitter 构造函数实例化前注册“event”事件，这样就可以保证实例化后的函数可以监听“event”事件。
+
+2. setTimeout()和 setImmediate()
+
+在三个方法中，这两个方法最容易被弄混。实际上，某些情况下这两个方法的表现也非常相似。然而实际上，这两个方法的意义却大为不同。
+
+setTimeout()方法是定义一个回调，并且希望这个回调在我们所指定的时间间隔后第一时间去执行。注意这个“第一时间执行”，这意味着，受到操作系统和当前执行任务的诸多影响，该回调并不会在我们预期的时间间隔后精准的执行。执行的时间存在一定的延迟和误差，这是不可避免的。node 会在可以执行 timer 回调的第一时间去执行你所设定的任务。
+
+setImmediate()方法从意义上将是立刻执行的意思，但是实际上它却是在一个固定的阶段才会执行回调，即 poll 阶段之后。有趣的是，这个名字的意义和之前提到过的 process.nextTick()方法才是最匹配的。node 的开发者们也清楚这两个方法的命名上存在一定的混淆，他们表示不会把这两个方法的名字调换过来---因为有大量的 node 程序使用着这两个方法，调换命名所带来的好处与它的影响相比不值一提。
+
+setTimeout()和不设置时间间隔的 setImmediate()表现上及其相似。猜猜下面这段代码的结果是什么？
+
+```
+setTimeout(() => {
+    console.log('timeout');
+}, 0);
+
+setImmediate(() => {
+    console.log('immediate');
+});
+```
+
+实际上，答案是不一定。没错，就连 node 的开发者都无法准确的判断这两者的顺序谁前谁后。这取决于这段代码的运行环境。运行环境中的各种复杂的情况会导致在同步队列里两个方法的顺序随机决定。但是，在一种情况下可以准确判断两个方法回调的执行顺序，那就是在一个 I/O 事件的回调中。下面这段代码的顺序永远是固定的：
+
+```
+const fs = require('fs');
+
+fs.readFile(__filename, () => {
+    setTimeout(() => {
+        console.log('timeout');
+    }, 0);
+    setImmediate(() => {
+        console.log('immediate');
+    });
+});
+```
+
+答案永远是：
+
+immediate
+timeout
+因为在 I/O 事件的回调中，setImmediate 方法的回调永远在 timer 的回调前执行。
