@@ -1,6 +1,6 @@
 ﻿---
 layout: post
-title: "server work"
+title: "Service Worker"
 subtitle: ""
 author: "ZJT"
 header-style: text
