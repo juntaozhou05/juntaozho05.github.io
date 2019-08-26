@@ -136,5 +136,4 @@ console.log(baseState, nextState);
   { todo: 'Tweet about it', done: false } ]
 */
 ```
-
 没问题,我们成功实现了轻量级的 immutable.js,在保证 api 友好的同时,做到了比 immutable.js 更小的体积和不错的性能.
