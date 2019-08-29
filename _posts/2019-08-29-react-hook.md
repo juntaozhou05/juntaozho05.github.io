@@ -150,6 +150,7 @@ Hooks 允许你通过哪些部分相关（例如添加和删除订阅）来组�
 钩子是 JavaScript 函数，但它们强加了两个额外的规则：
 
 - 只能在顶层调用 Hooks。不要在循环，条件或嵌套函数中调用 Hook
+
 - 仅从 React 功能组件调用 Hooks。 不要从常规 JavaScript 函数中调用 Hook。 （还有另一个有效的地方叫 Hooks - 你自己的定制 Hooks。我们马上就会了解它们。）
 
 #### Custom Hooks
