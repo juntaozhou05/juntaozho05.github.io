@@ -91,7 +91,7 @@ repaint：如果只是改变某个元素的背景色、文 字颜色、边框颜
 1：不要通过父级来改变子元素样式，最好直接改变子元素样式，改变子元素样式尽可能不要影响父元素和兄弟元素的大小和尺寸
 
 2：尽量通过 class 来设计元素样式，切忌用 style
-
+```
 var bstyle = document.body.style; // cache
 
 bstyle.padding = "20px"; // reflow, repaint
@@ -104,8 +104,9 @@ bstyle.fontSize = "2em"; // reflow, repaint
 
 // new DOM element - reflow, repaint
 document.body.appendChild(document.createTextNode('dude!'));
-
+```
 对上面代码优化：
+```
 .b-class{
 　　 padding:20px;
 　　 color:blue;
@@ -114,7 +115,7 @@ document.body.appendChild(document.createTextNode('dude!'));
 　　 font-size:2em;
 }
 \$div.addClass("b-class");
-
+```
 3：实现元素的动画，对于经常要进行回流的组件，要抽离出来，它的 position 属性应当设为 fixed 或 absolute
 
 4：权衡速度的平滑。比如实现一个动画，以 1 个像素为单位移动这样最平滑，但 reflow 就会过于频繁，CPU 很快就会被完全占用。如果以 3 个像素为单位移动就会好很多。
@@ -132,7 +133,7 @@ document.body.appendChild(document.createTextNode('dude!'));
 10: 尽量不要过多的频繁的去增加，修改，删除元素，因为这可能会频繁的导致页面 reflow，可以先把该 dom 节点抽离到内存中进行复杂的操作然后再 display 到页面上。
 
 在 div.first 里面加入 div.second,在 div.second 里面加入 div.third:
-
+```
 $divS = $("<div class='second'></div>");
 
 $(div.first).append($divS));//reflow
@@ -140,9 +141,10 @@ $(div.first).append($divS));//reflow
 $divT = $("<div class='third'></div>");
 
 $divS.append($divT);//reflow
+```
 
 优化代码：
-
+```
 $divS = $("<div class='second'></div>");
 
 $divT = $("<div class='third'></div>");
@@ -150,9 +152,10 @@ $divT = $("<div class='third'></div>");
 $divS.append($divT);
 
 $(div.first).append($divS));//reflow
+```
 
 或者：
-
+```
 var $divF = $(div.first);
 
 $divS = $("<div class='second'></div>");
@@ -166,11 +169,11 @@ $divT = $("<div class='third'></div>");
 $divS.append($divT);
 
 \$divS.show();//reflow
-
+```
 11：请求如下值 offsetTop, offsetLeft, offsetWidth, offsetHeight，scrollTop/Left/Width/Height，clientTop/Left/Width/Height，浏览器会发生 reflow，建议将他们合并到一起操作，可以减少回流的次数。
 
 如果我们要经常去获取和操作这些值，则可以先将这些值缓存起来例如：
-
+```
 var windowHeight = window.innerHeight;//reflow
 
 for(i=0;i<10;i++){
@@ -180,3 +183,4 @@ for(i=0;i<10;i++){
 一系列关于 windowHeight 的操作.......
 
 }
+```
