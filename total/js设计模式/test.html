@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test</title>
+</head>
+<body>
+    <script>
+        const StrategyMap = {}
+        function context(type, ...rest) {
+            return StrategyMap[type] && StrategyMap[type](...rest)
+        }
+        StrategyMap.minus100_30 = function(price) {
+            return price - Math.floor(price / 100) * 30;
+        }
+        console.log(context('minus100_30', 270)); //210
+    </script>
+</body>
+</html>
