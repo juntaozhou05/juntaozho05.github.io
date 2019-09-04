@@ -10,9 +10,9 @@ tags:
 
 ### 编译器（Compiler）和编译（Compilation）
 
-- compiler 包含了 webpack 环境配置，当 webpack 调用插件的时候，会返回一个 compiler 对象，提供给插件。
+- compiler 对象代表了 Webpack 完整的可配置的环境。该对象在 Webpack 启动的时候会被创建，同时该对象也会被传入一些可控的配置，如 Options、Loaders、Plugins。当插件被实例化的时候，会收到一个 Compiler 对象，通过这个对象可以访问 Webpack 的内部环境。
 
-- compilation 是编译过程的生命周期，这个对象可以访问所有的模块和它们的依赖。
+- compilation 对象在每次文件变化的时候都会被创建，因此会重新产生新的打包资源。该对象表示本次打包的模块、编译的资源、文件改变和监听的依赖文件的状态。而且该对象也会提供很多的回调点，我们的插件可以使用它来完成特定的功能，而提供的钩子函数在前面的章节已经讲过了，此处不再赘述
 
 ### 基本插件架构
 
@@ -136,4 +136,152 @@ MyPlugin.prototype.apply = function(compiler) {
 // 以上compiler和compilation的事件监听只是一小部分，详细API可见该链接http://www.css88.com/doc/webpack2/api/plugins/
 
 module.exports = MyPlugin;
+```
+
+### 哪些常用的插件
+
+1. DefinePlugin
+
+DefinePlugin 允许创建一个在编译时可以配置的全局常量。这可能会对开发模式和发布模式的构建允许不同的行为非常有用。如果在开发构建中，而不在发布构建中执行日志记录，则可以使用全局常量来决定是否记录日志。这就是 DefinePlugin 的用处，设置它，就可以忘记开发和发布构建的规则。
+
+每个传进 DefinePlugin 的键值都是一个标志符或者多个用 . 连接起来的标志符。
+
+- 如果 value 是一个字符串，它将会被当做 code 片段
+- 如果 value 不是字符串，它将会被 stringify(包括函数)
+- 如果 value 是一个对象，则所有 key 的定义方式相同。
+- 如果 key 有 typeof 前缀，它只是对 typeof 调用定义的。
+
+这些值将内联到代码中，压缩减少冗余。
+
+```
+new webpack.DefinePlugin({
+    PRODUCTION: JSON.stringify(true),
+    VERSION: JSON.stringify('5fa3b9'),
+    BROWSER_SUPPORTS_HTML5: true,
+    TWO: '1+1',
+    'typeof window': JSON.stringify('object'),
+    'process.env': {
+         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+     }
+});
+```
+
+plugin 不是直接的文本值替换，它的值在字符串内部必须包括实际引用。典型的情况是用双引号或者 JSON.stringify()进行引用，'"production"',JSON.stringify('production')。
+
+**重点:在 vue-cli 创建的项目中，凡是 src 下的文件，都可以访问到 VERSION 这个变量，例如 main.js，App.vue 等等**
+
+我们现在看一下上面的几种类型的 key 值，在代码中的输出。
+
+```
+console.log(PRODUCTION, VERSION, BROWSER_SUPPORTS_HTML5, TWO, typeof window, process.env);
+
+PRODUCTION: true,
+VERSION: "5fa3b9",
+BROWSER_SUPPORTS_HTML5: true,
+TWO: 2,
+typeof window: "object",
+process.env: {NODE_ENV: "development"},
+```
+
+在代码中，我们一般会有以下几种用途：
+
+- 根据 process.env.NODE_ENV 区分环境
+- 引入配置文件
+- 根据 NODE_ENV 引入配置文件（这个很重要，后面会讲到）
+
+下面我将以一个实例来介绍如何正确使用 webpack.DefinePlugin。
+
+**/config/api.js**
+
+```
+const NODE_ENV = process.env.NODE_ENV;
+const config = {
+     production: {
+        FOO_API: 'production.foo.api.com',
+        BAR_API: 'production.bar.api.com',
+        BAZ_API: 'production.baz.api.com',
+     },
+     development: {
+        FOO_API: 'development.foo.api.com',
+        BAR_API: 'development.bar.api.com',
+        BAZ_API: 'development.baz.api.com',
+     },
+     test: {
+        FOO_API: 'test.foo.api.com',
+        BAR_API: 'test.bar.api.com',
+        BAZ_API: 'test.baz.api.com',
+     }
+}
+module.exports = config[NODE_ENV];
+```
+
+**webpack.dev.conf.js/webpack.prod.conf.js/webpack.test.conf.js**
+
+```
+const apiConfig = require('./config/api');
+const webpackConfig = {
+    plugins: [
+        new webpack.DefinePlugin({
+            API_CONFIG: JSON.stringify(apiConfig);
+        })
+    ]
+}
+```
+
+**custom.component.vue**
+
+```
+<template>
+...
+</template>
+<script>
+// 这里也可以访问到API_CONFIG
+export default {
+    // 这里无论是data函数，methods对象，computed对象，watch对象，都可以访问到API_CONFIG;
+   data() {
+       return {
+           fooApi: API_CONFIG.FOO_API,
+           user:{
+               id: '',
+               name: '',
+           },
+           hash: '',
+        }
+    },
+    computed: {
+        userAvator() {
+            return `${API_CONFIG.BAR_API}?id=${user.id}&name=${user.name}`
+        }
+    },
+    methods: {
+        uploadImage() {
+            api.uploadImage({user: `${API_CONFIG.BAZ}\${hash}`})
+                 .then(()=>{})
+                 .catch(()=>{})
+        }
+    }
+}
+</script>
+```
+
+2. clean-webpack-plugin
+
+在每次生成 dist 目录前，先删除本地的 dist 文件（每次自动删除太麻烦）
+
+使用:
+
+```
+plugins:[
+        new CleanWebpackPlugin(['dist']), //传入数组,指定要删除的目录
+        new HtmlWebpackPlugin({
+            chunks:['index'],
+            filename:'index.html',
+            minify:{
+                collapseWhitespace:true //折叠空白区域 也就是压缩代码
+            },
+            hash:true,
+            title:'I love China',
+            template: './src/index.html' //模板地址
+        })
+    ]
 ```

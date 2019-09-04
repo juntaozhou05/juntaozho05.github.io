@@ -13,7 +13,16 @@
     <!-- <script src="./datas/queue.js"></script> -->
     <!-- <script src="./react/fiber.js"></script> -->
     <script>
-      
+      let obj = {};
+      Object.defineProperty(obj, "job", {
+        enumerable: false,
+        configurable: false,
+        writable: false,
+        value: "ddd"
+      });
+      console.log(obj.job);
+      obj.job = "ac";
+      console.log(obj.job);
     </script>
   </body>
 </html>
