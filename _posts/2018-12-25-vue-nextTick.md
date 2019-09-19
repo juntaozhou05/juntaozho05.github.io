@@ -337,3 +337,17 @@ fs.readFile(__filename, () => {
 immediate
 timeout
 因为在 I/O 事件的回调中，setImmediate 方法的回调永远在 timer 的回调前执行。
+
+#### vue 父子生命周期钩子执行顺序
+
+```
+1.首次加载过程
+父beforeCreate -> 父created -> 父beforeMount -> 子beforeCreate -> 子created -> 子beforeMount ->
+子mounted -> (子activated) -> 父mounted
+2.父组件更新过程
+父beforeUpdate -> (子deactivated) -> 父updated
+3.子组件更新过程
+父beforeUpdate -> 子beforeUpdate -> 子updated -> 父updated
+4.销毁过程
+父beforeDestroy-> 子beforeDestroy -> 子destroyed -> 父destroyed
+```

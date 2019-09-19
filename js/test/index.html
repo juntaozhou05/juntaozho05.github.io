@@ -12,7 +12,7 @@
     <!-- <script src="./stack.js"></script> -->
     <!-- <script src="./datas/queue.js"></script> -->
     <!-- <script src="./react/fiber.js"></script> -->
-    <script>
+    <!-- <script>
       let obj = {};
       Object.defineProperty(obj, "job", {
         enumerable: false,
@@ -23,6 +23,16 @@
       console.log(obj.job);
       obj.job = "ac";
       console.log(obj.job);
+    </script> -->
+    <script>
+      let arr = [1, 2, 3, 4, 5, 6, 7];
+      function move(k) {
+        for (let i = 0; i < k; i++) {
+          arr.unshift(arr.pop());
+        }
+        return arr;
+      }
+      console.log(move(3));
     </script>
   </body>
 </html>
