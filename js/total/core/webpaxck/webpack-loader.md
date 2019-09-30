@@ -1,6 +1,6 @@
 ﻿---
 layout: post
-title: "js new对象和Object.create"
+title: "webpack loader"
 subtitle: ""
 author: "ZJT"
 header-style: text
