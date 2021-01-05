@@ -152,7 +152,23 @@ mergeSort(arr2);
 
 解答：
 ```
+function search(arr, target) {
+  let left = 0;
+  let right = arr.length - 1;
 
+  while(left <= right) {
+    let mid = Math.round((right + left) / 2);
+    if(arr[mid] === target) {
+      return mid;
+    }
+    if(arr[mid] < target) {
+      return mid + 1;
+    }
+    if(arr[mid] > target) {
+      return mid - 1;
+    }
+  }
+}
 ```
 
 
