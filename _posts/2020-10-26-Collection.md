@@ -171,6 +171,179 @@ function search(arr, target) {
 }
 ```
 
+5.x 的平方根
+实现 int sqrt(int x) 函数。
+
+计算并返回 x 的平方根，其中 x 是非负整数。
+
+由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。
+
+示例 1:
+
+输入: 4
+输出: 2
+示例 2:
+
+输入: 8
+输出: 2
+说明: 8 的平方根是 2.82842...,
+由于返回类型是整数，小数部分将被舍去。
+
+思路：
+本题利用二分查找来求解，一开始把右边界粗略的设定为目标值 x，左右边界的中间值设为 mid，然后在二分过程中每次发现 mid * mid < x 的情况，就把这个 mid 值记录为 ans。
+
+如果计算出的乘积正好等于 x，就直接返回这个 mid 值。
+
+如果二分查找超出边界了，无论最后的边界是停留在小于 x 的位置还是大于 x 的位置，都返回 ans 即可，因为它是最后一个乘积小于 x 的值，一定是正确答案。
+
+解答：
+```
+let mySqrt = function (x) {
+  let left = 0;
+  let right = x;
+  let ans = 0;
+  while(left <= right) {
+    let mid = Math.round((left + right) / 2);
+    let product = mid * mid;
+    if(product <= x) {
+      ans = mid;
+      left = mid + 1;
+    }else if(product > x) {
+      right = mid - 1;
+    }else {
+      return mid;
+    }
+  }
+  return ans
+};
+```
+
+6.Pow(x, n)
+实现 pow(x, n) ，即计算 x 的 n 次幂函数。
+
+思路：
+把 x 的 n 次方转化为 x * x 的 n / 2 次方。
+
+比如求 2 的 10 次方可以转为 4 的 5 次方，这时候遇到奇数次方了，就转化为 4* (4 的 4 次方)。
+
+然后对于 4 的 4 次方，再进一步转化为 16 的 2 次方，最后转为 256 的 1 次方 * 4，就得出最终解 1024。
+
+解答：
+```
+var myPow = function (x, n) {
+  if (n === 0) return 1;
+  if (n === 1) return x;
+  let abs = Math.abs(n);
+  let isMinus = abs !== n;
+
+  let res = abs % 2 === 0 ? myPow(x * x, abs / 2) : x * myPow(x, abs - 1);
+  return isMinus ? 1 / res : res;
+};
+```
+
+7.长度最小的子数组
+给定一个含有 n 个正整数的数组和一个正整数 s ，找出该数组中满足其和 ≥ s 的长度最小的连续子数组，并返回其长度。如果不存在符合条件的连续子数组，返回 0。
+
+示例:
+
+输入: s = 7, nums = [2,3,1,2,4,3]
+输出: 2
+解释: 子数组 [4,3] 是该条件下的长度最小的连续子数组。
+
+思路：
+定义两个下标 i、j 为左右边界，中间的子数组为滑动窗口。在更新窗口的过程中不断的更新窗口之间的值的和 sum。
+
+当 sum < 目标值，说明值不够大，j++，右边界右移。
+当 sum >= 目标值，满足条件，把当前窗口的大小和记录的最小值进行对比，更新最小值。并且 i++ 左窗口右移，继续找最优解。
+当 i 超出了数组的右边界，循环终止。
+
+解答：
+```
+let minSubArrayLen = function (s, nums) {
+  let n = nums.length;
+
+  let i = 0;
+  let j = -1;
+
+  let sum = 0;
+  let res = Infinity;
+
+  while(i < n) {
+    if (sum < s) {
+      sum += nums[++j];
+    }else {
+      sum -= nums[i];
+      i++;
+    }
+    if(sum >= s) {
+      res = Math.min(res, j - i + 1)
+    }
+  }
+  return res === Infinity ? 0 : res;
+}
+```
+
+8.给定一个字符串，请你找出其中不含有重复字符的   最长子串   的长度。
+
+示例  1:
+
+输入: "abcabcbb"
+输出: 3
+解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+示例 2:
+
+输入: "bbbbb"
+输出: 1
+解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
+示例 3:
+
+输入: "pwwkew"
+输出: 3
+解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
+     请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
+
+
+思路：
+这题是比较典型的滑动窗口问题，定义一个左边界 left 和一个右边界 right，形成一个窗口，并且在这个窗口中保证不出现重复的字符串。
+
+这需要用到一个新的变量 freqMap，用来记录窗口中的字母出现的频率数。在此基础上，先尝试取窗口的右边界再右边一个位置的值，也就是 str[right + 1]，然后拿这个值去 freqMap 中查找：
+
+这个值没有出现过，那就直接把 right ++，扩大窗口右边界。
+如果这个值出现过，那么把 left ++，缩进左边界，并且记得把 str[left] 位置的值在 freqMap 中减掉。
+循环条件是 left < str.length，允许左边界一直滑动到字符串的右界。
+
+解答：
+```
+let lengthOfLongestSubstring = function (str) {
+  let n = str.length
+  // 滑动窗口为s[left...right]
+  let left = 0
+  let right = -1
+  let freqMap = {} // 记录当前子串中下标对应的出现频率
+  let max = 0 // 找到的满足条件子串的最长长度
+
+  while (left < n) {
+    let nextLetter = str[right + 1]
+    if (!freqMap[nextLetter] && nextLetter !== undefined) {
+      freqMap[nextLetter] = 1
+      right++
+    } else {
+      freqMap[str[left]] = 0
+      left++
+    }
+    max = Math.max(max, right - left + 1)
+  }
+
+  return max
+}
+```
+
+
+
+
+
+
+
 
 
 
