@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "不同路径"
+title: "算法总结1"
 subtitle: ""
 author: "ZJT"
 header-style: text
