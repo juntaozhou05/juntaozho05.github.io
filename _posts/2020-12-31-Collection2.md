@@ -138,13 +138,91 @@ s = "axc", t = "ahbgdc"
 
 解答：
 ```
+let isSubsequence = function(s, t) {
+  let sl = s.length;
+  if(!sl) {
+    return true;
+  }
+
+  let i = 0;
+  for(let j =0; j < t.length; j++) {
+    let target = s[i];
+    let cur = t[j];
+    if(target === cur) {
+      i++;
+      if(i === sl) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+```
+
+4.颜色分类
+给定一个包含红色、白色和蓝色，一共 n 个元素的数组，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。
+
+此题中，我们使用整数 0、 1 和 2 分别表示红色、白色和蓝色。
+
+注意:
+不能使用代码库中的排序函数来解决这道题。
+
+示例:
+
+输入: [2,0,2,1,1,0]
+输出: [0,0,1,1,2,2]
+
+思路：
+最简单的思路就是遍历一遍整个数组，统计出其中各个颜色的数量，最后把这个数组重新填充即可。
+
+解答：
+```
+let sortColors = function(nums) {
+  let colors  =[0, 0, 0];
+  for(let i = 0; i < nums.length; i++) {
+    colors[nums[i]] ++
+  }
+  nums.length = 0;
+  for(let i = 0; i < colors.length; i++) {
+    for(let j = 0; j < colors[i]; j++) {
+      nums.push(i)
+    }
+  }
+  return nums;
+}
+```
+
+5.快速排序
+三路快排了，顾名思义这种快排就是把数组区分成 < v, ===v, >v 三个区间，然后把等于 v 的区间排除掉，继续对剩余的两个区间进行递归的快速排序。
+
+解答：
+```
 
 ```
 
+6.通过删除字母匹配到字典里最长单词
+给定一个字符串和一个字符串字典，找到字典里面最长的字符串，该字符串可以通过删除给定字符串的某些字符来得到。如果答案不止一个，返回长度最长且字典顺序最小的字符串。如果答案不存在，则返回空字符串。
 
+示例 1:
 
+输入:
+s = "abpcplea", d = ["ale","apple","monkey","plea"]
 
+输出:
+"apple"
+示例 2:
 
+输入:
+s = "abpcplea", d = ["a","b","c"]
+
+输出:
+"a"
+说明:
+
+解答：
+```
+
+```
 
 
 
