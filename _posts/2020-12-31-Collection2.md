@@ -197,7 +197,21 @@ let sortColors = function(nums) {
 
 解答：
 ```
-
+const quickSort = (arr) => {
+  if(arr.length <= 1) return arr;
+  let mid = Math.floor(arr.length / 2);
+  let target = arr.splice(mid, 1)[0];
+  let left = [];
+  let right = [];
+  for(let i = 0; i < arr.length; i++) {
+    if(arr[i] < target) {
+      left.push(arr[i]);
+    }else {
+      right.push(arr[i]);
+    }
+  }
+  return quickSort(left).concat([target], quickSort(right));
+}
 ```
 
 6.通过删除字母匹配到字典里最长单词
@@ -221,7 +235,31 @@ s = "abpcplea", d = ["a","b","c"]
 
 解答：
 ```
+let findLongestWord = function (s, d) {
+  let n = d.length
+  let points = Array(n).fill(-1)
 
+  let find = ""
+  for (let i = 0; i < s.length; i++) {
+    let char = s[i]
+    for (let j = 0; j < n; j++) {
+      let targetChar = d[j][points[j] + 1]
+      if (char === targetChar) {
+        points[j]++
+        let word = d[j]
+        let wl = d[j].length
+        if (points[j] === wl - 1) {
+          let fl = find.length
+          if (wl > fl || (wl === fl && word < find)) {
+            find = word
+          }
+        }
+      }
+    }
+  }
+
+  return find
+}
 ```
 
 
