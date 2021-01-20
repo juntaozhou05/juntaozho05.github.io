@@ -262,6 +262,78 @@ let findLongestWord = function (s, d) {
 }
 ```
 
+7.最长单词
+给定一组单词 words，编写一个程序，找出其中的最长单词，且该单词由这组单词中的其他单词组合而成。若有多个长度相同的结果，返回其中字典序最小的一项，若没有符合要求的单词则返回空字符串。
+
+示例：
+
+输入： ["cat","banana","dog","nana","walk","walker","dogwalker"]
+输出： "dogwalker"
+解释： "dogwalker"可由"dog"和"walker"组成。
+提示：
+
+0 <= len(words) <= 100
+1 <= len(words[i]) <= 100
+
+思路：
+根据题目的要求来看，先把 words 数组按照先比较长度，后比较字典序排列好，把长度最长且字典序最小的字符串先放在前面，然后遍历 words 数组，用当前的单词 word 去和剩下的单词数组利用单词拆分-139的动态规划思路求解是否能拼成，这样可以尽早的返回正确结果。
+
+解答：
+```
+let wordBreak = function (s, wordDict) {
+  let n = s.length
+  if (!n) return true
+
+  let wordSet = new Set(wordDict)
+  let dp = []
+  dp[0] = true
+
+  for (let i = 0; i <= n; i++) {
+    for (let j = i; j >= 0; j--) {
+      let word = s.slice(j, i)
+      if (wordSet.has(word) && dp[j]) {
+        dp[i] = true
+        break
+      }
+    }
+  }
+
+  return !!dp[n]
+}
+
+let longestWord = function (words) {
+  // 先长度降序 后字典序升序 排序
+  words.sort((a, b) => {
+    let diff = b.length - a.length
+    if (diff !== 0) {
+      return diff
+    } else {
+      return a < b ? -1 : 1
+    }
+  })
+  words = Array.from(new Set(words))
+  for (let i = 0; i < words.length; i++) {
+    let word = words[i]
+    let rest = words.slice(0, i).concat(words.slice(i + 1))
+    if (wordBreak(word, rest)) {
+      return word
+    }
+  }
+  return ""
+}
+
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
 
