@@ -284,12 +284,63 @@ let merge = function (arr1, m, arr2, n) {
 };
 ```
 
+6.移动零
+给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+示例:
 
+输入: [0,1,0,3,12]
+输出: [1,3,12,0,0]
+说明:
 
+必须在原数组上操作，不能拷贝额外的数组。尽量减少操作次数。
 
+思路：
+暴力法
+先遍历一次，找出所有 0 的下标，然后删除掉所有 0 元素，再 push 相应的 0 的个数到末尾。
 
+解答：
+```
+var moveZeroes = function (nums) {
+  let zeros = [];
+  for(let i = 0; i < nums.length; i++) {
+    if(nums[i] === 0) {
+      zeros.push(i);
+    }
+  }
+  for(let i = zeros.length - 1; i >= 0; i--) {
+    nums.splice(zeros[i], 1);
+  }
+  for(let i = 0; i < zeros.length; i++) {
+    nums.push(0);
+  }
+  return nums;
+}
+```
+双指针
+慢指针 j 从 0 开始，当快指针 i 遍历到非 0 元素的时候，i 和 j 位置的元素交换,然
+后把 j + 1。
 
+也就是说，快指针 i 遍历完毕后, [0, j) 区间就存放着所有非 0 元素，而剩余的[j,
+n]区间再遍历一次，用 0 填充满即可。
 
+解答：
+```
+var moveZeroes = function (nums) {
+  let j = 0;
+
+  for(let i = 0; i < nums.length; i++) {
+    if(nums[i] !== 0) {
+      nums[j] = nums[i];
+      j++;
+    }
+  }
+  while(j < nums.length) {
+    nums[j] = 0;
+    j++;
+  }
+  return nums;
+}
+```
 
 
 
