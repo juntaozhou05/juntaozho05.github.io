@@ -192,7 +192,61 @@ function knapsack(weights, values, W){
 }
 ```
 
+5.三角形最小路径和
+给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。
 
+相邻的结点 在这里指的是 下标 与 上一层结点下标 相同或者等于 上一层结点下标 + 1 的两个结点。
+
+例如，给定三角形：
+
+[
+     [2],
+    [3,4],
+   [6,5,7],
+  [4,1,8,3]
+]
+
+自顶向下的最小路径和为  11（即，2 + 3 + 5 + 1 = 11）。
+
+思路：
+上一层的某个 index 的最小值是由下一层的两个相邻节点的最小值所决定的。
+
+那么先从最后一行开始求每一个下标所对应的最小路径，也就是最后一行每个下标本身的值，作为基础状态，然后向上面的行求解即可。
+```
+dp[level][index] = min(
+   indexVal + dp[level + 1][index],
+   indexVal + dp[level + 1][index + 1],
+)
+```
+
+解答：
+```
+let minimumTotal = function (triangle) {
+  let dp = []
+  let n = triangle.length
+  if (!n) {
+    return 0
+  }
+
+  dp[n - 1] = triangle[n - 1]
+
+  for (let i = n - 2; i >= 0; i--) {
+    dp[i] = []
+    let row = triangle[i]
+    for (let j = 0; j < row.length; j++) {
+      let curVal = row[j]
+      dp[i][j] = Math.min(
+        // 选择下一层同下标
+        curVal + dp[i + 1][j],
+        // 选择下一层next下标
+        curVal + dp[i + 1][j + 1]
+      )
+    }
+  }
+
+  return dp[0][0]
+}
+```
 
 
 
