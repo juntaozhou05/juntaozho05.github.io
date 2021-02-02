@@ -451,12 +451,56 @@ rorse -> rose (删除 'r')
 rose -> ros (删除 'e')
 
 思路：
+编辑无非就是三种情况，字符的插入、删除以及编辑：
 
+插入一个字符为进行了一次操作，如：fat->fait;
 
+删除一个字符也视为进行一次操作，如：haven->have;
 
+替换字符也视为进行一次操作，如：let->lit。
 
+这个算法的原理不太好理解，但放到矩阵中实现的过程很简单，我们把两个字符串放到矩阵里进行解析，这里用到了动态规划：
+```
+在相同位置上两个字符串不同:cost=1；反则为0
 
+matrix[m][n]=Math.min(matrix[m-1][n]+1,matrix[m][n-1]+1,matrix[m-1][n-1]+cost)
+```
+其中matrix[m-1][n]+1代表删除操作，matrix[m][n-1]+1代表新增，matrix[m-1][n-1]+cost代表字符的替换，然后求出他们三个值的最小值。
 
+解答：
+```
+function minDistance(s1, s2) {
+  const len1 = s1.length
+  const len2 = s2.length
+
+  let matrix = []
+
+  for (let i = 0; i <= len1; i++) {
+    // 构造二维数组
+    matrix[i] = new Array()
+    for (let j = 0; j <= len2; j++) {
+      // 初始化
+      if (i == 0) {
+        matrix[i][j] = j
+      } else if (j == 0) {
+        matrix[i][j] = i
+      } else {
+        // 进行最小值分析
+        let cost = 0
+        if (s1[i - 1] != s2[j - 1]) { // 相同为0，不同置1
+            cost = 1
+        }
+        const temp = matrix[i - 1][j - 1] + cost
+        matrix[i][j] = Math.min(matrix[i - 1][j] + 1, matrix[i][j - 1] + 1, temp)
+        console.log('matrix', matrix)
+      }
+    }
+  }
+  return matrix[len1][len2] //返回右下角的值
+}
+```
+
+10.
 
 
 
