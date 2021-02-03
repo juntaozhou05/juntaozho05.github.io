@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "算法总结3-动态规划"
+title: "算法总结4-动态规划"
 subtitle: ""
 author: "ZJT"
 header-style: text
