@@ -45,9 +45,43 @@ setTimeout的执行只是在内存中对图像属性进行改变，这个改变�
 1.setInterval
 
 ```
-
+function setInterval1(cb, interval) {
+    let timer;
+    const now = Date.now;
+    let startTime = now();
+    let endTime = startTime;
+    const loop = () => {
+        timer = window.requestAnimationFrame(loop);
+        endTime = now();
+        if(endTime - startTime >= interval) {
+            startTime = endTime = now();
+            cb(timer);
+        }
+    }
+    timer = window.requestAnimationFrame(loop);
+    return timer;
+}
 ```
 
+2.setTimeout
+
+```
+function setTimeout1(cb ,interval) {
+  let timer;
+  let now = Date.now;
+  let startTime = now();
+  const loop = () => {
+    timer = window.requestAnimationFrame(loop);
+    let endTime = now();
+    if(endTime - startTime >= interval) {
+      cb(timer);
+      window.cancelAnimationFrame(timer);
+    }
+  }
+  timer = window.requestAnimationFrame(loop);
+  return timer;
+}
+```
 
 
 
